@@ -1,8 +1,8 @@
 class Chat {
-    
-    constructor(path) {
 
-        this.path = path;
+    constructor(name) {
+
+        this.name = name;
         this.totalMessages;
         this.user1;
         this.user2;
