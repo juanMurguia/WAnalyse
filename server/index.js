@@ -12,14 +12,17 @@ app.use(express.json());
 
 const port = process.env.PORT || 3000
 
-
 const upload = multer({ dest: "uploads/" })
+
 
 app.post("/uploads", upload.single("file") ,(req,res) =>{
     console.log(req.file)
 
     let chat = new Chat(req.file.filename)
 
+    chat.analyse();
+
+    res.send(chat.getData())
 
 })
 
