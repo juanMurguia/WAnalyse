@@ -17,9 +17,12 @@ const upload = multer({ dest: "uploads/" })
 
 app.post("/uploads", upload.single("file") ,(req,res) =>{
     console.log(req.file)
-    res.send("Termina")
-    contadorDeAlejos( "./uploads/" + req.file.filename)
+
+    let chat = new Chat(req.file.filename)
+
+
 })
+
 
 app.listen(port, () => {
     console.log(`Listening on port http://localhost:${port}`);
