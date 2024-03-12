@@ -16,36 +16,43 @@ class Chat {
     }
 
     // Properties
-    get getDAta(){
+    get getData(){
         return {
-            
+            "totalMessages" : this.totalMessages
         }
     }
 
     // Methods
     countTotalMessages() {
-        const rl = readline.createInterface({
-            input: this.stream,
-            crlfDelay: Infinity
-        });
-        let contador = 0
+        return new Promise((resolve, reject) => {
+            let contador = 0;
+            const stream = fs.createReadStream(this.path);
+            const rl = readline.createInterface({
+                input: stream,
+                crlfDelay: Infinity
+            });
 
-        rl.on('line', (line) => {
-            contador ++;
-        });
+            rl.on('line', () => {
+                contador++;
+            });
 
-        rl.on('close', () => {
-            this.totalMessages = contador;
+            rl.on('close', () => {
+                this.totalMessages = contador;
+                console.log(`Total de mensajes: ${contador}`);
+                resolve();
+            });
 
-            console.log(`Total de mensajes: ${this.totalMessages}`);
+            rl.on('error', (err) => {
+                reject(err);
+            });
         });
     }
 
 
 
-    analyse() {
+    async analyse() {
 
-        this.totalMessages = this.countTotalMessages();
+        await this.countTotalMessages();
 
         // const { nameUser1 , nameUser2 } = this.identifyUsers();
         // this.user1 = nameUser1;
