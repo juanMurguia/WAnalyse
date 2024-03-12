@@ -8,12 +8,12 @@ class Chat {
 
         this.name = name;
         this.path = `./uploads/${name}`
+        this.stream = fs.createReadStream(this.path);
         this.totalMessages = 0;
         this.nameUser1 = "";
         this.nameUser2 = "";
         this.messageCountUser1 = 0;
         this.messageCountUser2 = 0;
-        this.stream = fs.createReadStream(this.path);
         this.mostUsedEmojisUser1 = "";
         this.mostUsedEmojisUser2 = "";
     }
@@ -21,11 +21,19 @@ class Chat {
     // Properties
     get getData() {
         return {
-            "NameUser1": this.nameUser1,
-            "NameUser2": this.nameUser2,
-            "totalMessages": this.totalMessages,
-            "User1MessageCount": this.messageCountUser1,
-            "User2MessageCount": this.messageCountUser2,
+            "statsUser1" :{
+                "Name": this.nameUser1,
+                "MessageCount": this.messageCountUser1,
+                "Top3MostUsedEmojis" : this.mostUsedEmojisUser1,
+            },
+            "statsUser2" :{
+                "NameUser2": this.nameUser2,
+                "User2MessageCount": this.messageCountUser2,
+                "Top3MostUsedEmojis" : this.mostUsedEmojisUser2,
+            },
+            "statsGlobal" : {
+                "totalMessages": this.totalMessages,
+            }
         }
     }
 
