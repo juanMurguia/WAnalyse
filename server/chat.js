@@ -12,7 +12,7 @@ class Chat {
         this.user2 = "";
         this.totalMessagesUser1 = 0;
         this.totalMessagesUser2 = 0;
-        const stream = fs.createReadStream(this.path);
+        this.stream = fs.createReadStream(this.path);
     }
 
     // Properties
@@ -23,37 +23,43 @@ class Chat {
     }
 
     // Methods
-    analyse() {
-
-        this.totalMessages = countTotalMessages();
-
-        const { nameUser1 , nameUser2 } = this.identifyUsers();
-        this.user1 = nameUser1;
-        this.user2 = nameUser2;
-
-        
-
-
-    }
-
-
     countTotalMessages() {
         const rl = readline.createInterface({
             input: this.stream,
             crlfDelay: Infinity
         });
+        let contador = 0
 
         rl.on('line', (line) => {
-            this.totalMessages += 1;
+            contador ++;
         });
 
         rl.on('close', () => {
+            this.totalMessages = contador;
+
             console.log(`Total de mensajes: ${this.totalMessages}`);
         });
     }
 
 
 
+    analyse() {
+
+        this.totalMessages = this.countTotalMessages();
+
+        // const { nameUser1 , nameUser2 } = this.identifyUsers();
+        // this.user1 = nameUser1;
+        // this.user2 = nameUser2;
+    }
+
+
+    
+
+
+
 
 
 }
+
+
+module.exports = { Chat }

@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer')
 const cors = require('cors');
 
-const { analyse } = require("./chat");
+const { Chat } = require("./chat");
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.post("/uploads", upload.single("file") ,(req,res) =>{
 
     chat.analyse();
 
-    res.send(chat.getData())
+    // res.send(chat.getData())
 
 })
 
