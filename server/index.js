@@ -15,14 +15,14 @@ const port = process.env.PORT || 3000
 const upload = multer({ dest: "uploads/" })
 
 
-app.post("/uploads", upload.single("file") ,(req,res) =>{
+app.post("/uploads", upload.single("file") , async(req,res) =>{
     console.log(req.file)
 
     let chat = new Chat(req.file.filename)
 
-    chat.analyse();
+    await chat.analyse();
 
-    res.send(chat.totalMessages)
+    res.send(chat.getData)
 
 })
 
