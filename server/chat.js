@@ -1,3 +1,4 @@
+const { match } = require('assert');
 const fs = require('fs');
 const readline = require('readline');
 
@@ -8,38 +9,51 @@ class Chat {
         this.name = name;
         this.path =  `./uploads/${name}`
         this.totalMessages = 0;
-        this.user1 = "";
-        this.user2 = "";
-        this.totalMessagesUser1 = 0;
-        this.totalMessagesUser2 = 0;
+        this.nameUser1 = "";
+        this.nameUser2 = "";
+        this.messageCountUser1 = 0;
+        this.messageCountUser2 = 0;
         this.stream = fs.createReadStream(this.path);
     }
 
     // Properties
-
     get getData(){
         return {
-            "totalMessages" : this.totalMessages
+            "NameuUser1" : this.nameUser1,
+            "NameUser2" : this.nameUser2,
+            "totalMessages" : this.totalMessages,
+            "User1MessageCount" : this.messageCountUser1,
+            "User2MessageCount": this.messageCountUser2,
         }
     }
 
     // Methods
-    countTotalMessages() {
+    countMessages() {
         return new Promise((resolve, reject) => {
-            let contador = 0;
             const stream = fs.createReadStream(this.path);
+
             const rl = readline.createInterface({
                 input: stream,
                 crlfDelay: Infinity
             });
 
-            rl.on('line', () => {
-                contador++;
+            rl.on('line', (line) => {
+                const regex = /\] ([^:]+):/g;
+                let match;
+
+                while ((match = regex.exec(line)) !== null) {
+
+                    if (match[1] == this.nameUser1) {
+                        this.messageCountUser1++;
+                    }
+                    else if (match[1] == this.nameUser2){
+                        this.messageCountUser2++;
+                    }
+                }
             });
 
             rl.on('close', () => {
-                this.totalMessages = contador;
-                console.log(`Total de mensajes: ${contador}`);
+                this.totalMessages = this.messageCountUser1 + this.messageCountUser2;
                 resolve();
             });
 
@@ -49,6 +63,40 @@ class Chat {
         });
     }
 
+
+
+    indetifyUserNames(){
+        return new Promise((resolve, reject) => {
+            const stream = fs.createReadStream(this.path);
+            const rl = readline.createInterface({
+                input: stream,
+                crlfDelay: Infinity
+            });
+
+            rl.on('line', (line) => {
+                const regex = /\] ([^:]+):/g;
+                let match;
+                while ((match = regex.exec(line)) !== null && this.nameUser1 == this.nameUser2 ) {
+
+                    if (this.nameUser1 == "") {
+                        this.nameUser1 = match[1];
+                        this.nameUser2 = match[1];
+                    }
+                    else if (match[1] != this.nameUser1) {
+                        this.nameUser2 = match[1]
+                    }
+                }
+            });
+
+            rl.on('close', () => {
+                resolve();
+            });
+
+            rl.on('error', (err) => {
+                reject(err);
+            });
+        });
+    }
 
     deleteFile(){
         fs.unlink(this.path, (err) => {
@@ -64,11 +112,11 @@ class Chat {
 
     async analyse() {
 
-        await this.countTotalMessages();
-        
-        // const { nameUser1 , nameUser2 } = this.identifyUsers();
-        // this.user1 = nameUser1;
-        // this.user2 = nameUser2;
+        await this.indetifyUserNames();
+        await this.countMessages();
+
+        // this.nameUser1 = nameUser1;
+        // this.nameUser2 = nameUser2;
     }
 
 
