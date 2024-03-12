@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer')
 const cors = require('cors');
 
-const { contadorDeAlejos } = require("./txtProcessor");
+const { analyse } = require("./chat");
 
 const app = express();
 
