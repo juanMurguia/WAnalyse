@@ -16,6 +16,7 @@ class Chat {
     }
 
     // Properties
+
     get getData(){
         return {
             "totalMessages" : this.totalMessages
@@ -49,11 +50,22 @@ class Chat {
     }
 
 
+    deleteFile(){
+        fs.unlink(this.path, (err) => {
+            if (err) {
+                console.error('Error al eliminar el archivo:', err);
+                return;
+            }
+            console.log('Archivo eliminado con éxito ');
+        });
+    }
+
+
 
     async analyse() {
 
         await this.countTotalMessages();
-
+        
         // const { nameUser1 , nameUser2 } = this.identifyUsers();
         // this.user1 = nameUser1;
         // this.user2 = nameUser2;
