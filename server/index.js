@@ -22,7 +22,7 @@ app.post("/uploads", upload.single("file") ,(req,res) =>{
 
     chat.analyse();
 
-    // res.send(chat.getData())
+    res.send(chat.totalMessages)
 
 })
 
