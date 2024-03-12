@@ -22,6 +22,8 @@ app.post("/uploads", upload.single("file") , async(req,res) =>{
 
     await chat.analyse();
 
+    chat.deleteFile();
+    
     res.send(chat.getData)
 
 })
