@@ -19,7 +19,7 @@ class Chat {
     // Properties
     get getData(){
         return {
-            "NameuUser1" : this.nameUser1,
+            "NameUser1" : this.nameUser1,
             "NameUser2" : this.nameUser2,
             "totalMessages" : this.totalMessages,
             "User1MessageCount" : this.messageCountUser1,
@@ -62,7 +62,6 @@ class Chat {
             });
         });
     }
-
 
 
     indetifyUserNames(){
@@ -114,17 +113,7 @@ class Chat {
 
         await this.indetifyUserNames();
         await this.countMessages();
-
-        // this.nameUser1 = nameUser1;
-        // this.nameUser2 = nameUser2;
     }
-
-
-    
-
-
-
-
 
 }
 
