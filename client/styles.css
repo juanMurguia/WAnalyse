@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'circular_stdmedium';
+    src: url('/fonts/circularstd-medium-webfont.woff2') format('woff2'),
+         url('/fonts/circularstd-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal; 
+  
+  }
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    
+}
+
+.circle {
+    height: 24px;
+    width: 24px;
+    border-radius: 24px;
+    background-color: black;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999999; /* so that it stays on top of all other elements */
+  }
+
+body{
+    background-color: rgb(255, 255, 255);
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    padding: 5% 5%;
+    cursor: none;
+}
+header{
+    display:flex;
+    height: 70px;
+    padding: 16px;
+    justify-content: start;
+}
+
+main{
+    display: flex;
+    max-width: 100dvw;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+main section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    align-items: center;
+}
+
+main section .hero{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.hero h1{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.hero p{
+    font-size: 1.2rem;
+}
+
+.contenedor-drag{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    height: 25vh;
+    width: 50vw;
+}
+
+.contenedor-drag button{
+    background-color: rgb(134, 0, 172);
+    width: 50%;
+    height: 80px;
+    border: none;
+    color: white;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+span.color{
+    background: #ff00cc; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ca00a2, #333399); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ca00a2, #333399); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;    
+}
+
+
+.drop-zone__input {
+    display: none;
+  }
+
+.drop-zone--over{
+    background-color: transparent;
+}
+
+.contenedor-drag p{
+    color: rgb(59, 59, 59);
+}
+
+.drop-zone{
+    display: flex;
+    opacity: 0;
+    position: absolute;
+    height: 100dvh;
+    width: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.808);
+}
+
+.drop-zone.active{
+    display: flex;
+    opacity: 1;
+    z-index: 999;
+    top: 0;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.drop-zone p{
+    font-size: 3rem;
+    color: #ededed;
+    text-align: center;
+    margin: auto;
+}
+.contenedor-drag .drag{
+    border: 2px gray dashed;
+    height: 25vh;
+    width: 50vw;
+}
+
+.info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    padding: 10% 10%;
+    text-align: left;
+}
+
+.info h2{
+    font-size: 4rem;
+}
+
+.info p{
+    font-size: 2rem;
+    text-align: left;
+}
