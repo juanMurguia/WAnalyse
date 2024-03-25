@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer')
 const cors = require('cors');
 
-const { contadorDeAlejos } = require("./txtProcesor");
+const { Chat } = require("./chat");
 
 const app = express();
 
@@ -12,14 +12,22 @@ app.use(express.json());
 
 const port = process.env.PORT || 3000
 
-
 const upload = multer({ dest: "uploads/" })
 
-app.post("/uploads", upload.single("file") ,(req,res) =>{
+
+app.post("/uploads", upload.single("file") , async(req,res) =>{
     console.log(req.file)
-    res.send("Termina")
-    contadorDeAlejos( "./uploads/" + req.file.filename)
+
+    let chat = new Chat(req.file.filename)
+
+    await chat.analyse();
+
+    chat.deleteFile();
+    
+    res.send(chat.getData)
+
 })
+
 
 app.listen(port, () => {
     console.log(`Listening on port http://localhost:${port}`);

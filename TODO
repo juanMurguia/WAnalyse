@@ -1,0 +1,13 @@
+- TO DO -
+
+Antes de enviar todo los datos al cliente, hay que eleminar el archivo DONE
+Detectar los 2 nombres con rejex DONE 
+
+Metricas : 
+    - La Palabra mas escrita por cada uno   
+    - Primer Mensaje fecha 
+    - Tiempo promedio de respuesta de cada uno 
+    - Emoji mas utilizado por cada uno   
+
+Descargar una especia de pdf con las metricas
+Agregar tests
