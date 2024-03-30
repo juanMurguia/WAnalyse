@@ -24,41 +24,6 @@ scroll.on("scroll", (args) => {
 
 //drop
 
-const dropZone = document.querySelector(".drop-zone");
-
-dropZone.addEventListener("dragover", (event) => {
-  event.preventDefault();
-  console.log("hizo dragover ");
-  dropZone.classList.add("active");
-});
-
-dropZone.addEventListener("dragleave", (event) => {
-  event.preventDefault();
-  dropZone.classList.remove("active");
-  console.log("sale de la zona");
-});
-
-dropZone.addEventListener("drop", (event) => {
-  event.preventDefault();
-  dropZone.classList.remove("active");
-  const files = event.dataTransfer.files;
-  handleFiles(files);
-});
-
-const fileInput = document.getElementById("fileInput");
-
-fileInput.addEventListener("change", () => {
-  const files = fileInput.files;
-  handleFiles(files);
-});
-
-function handleFiles(files) {
-  for (const file of files) {
-    console.log(file.name);
-    // Aquí puedes enviar los archivos al servidor para su procesamiento utilizando AJAX o Fetch API
-  }
-}
-
 //cursor
 const coords = { x: 0, y: 0 };
 const circles = document.querySelectorAll(".circle");

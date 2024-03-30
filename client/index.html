@@ -6,11 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatAnalyze</title>
-
-
-
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="stars.css">
     <link href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </head>
@@ -37,28 +33,24 @@
     <div class="circle"></div>
     <div class="circle"></div>
 
-    <div class="estrellas">
-        <div id="stars"> </div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-    </div>
-
-
     <main data-scroll-container>
         <section data-scroll-section>
-            <div class="drop-zone" id="drop-zone">
-                <p>Soltalo acá</p>
-            </div>
-            <input type="file" multiple class="drop-zone__input" id="fileInput">
-            <div class="hero">
-                <h1>Analiza tus chats de WhatsApp</h1>
-                <p>y descubre las estadisticas más importantes</p>
-            </div>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <button type="submit">Seleccionar archivo</button>
+                <div class="drop-zone" id="drop-zone">
+                    <p>Soltalo acá</p>
+                </div>
+                <input type="file" multiple class="drop-zone__input" id="fileInput" name="file">
+                <div class="hero">
+                    <h1>Analiza tus chats de WhatsApp</h1>
+                    <p>y descubre las estadisticas más importantes</p>
+                </div>
 
-            <div class="contenedor-drag">
-                <button> Seleccionar archivo</button>
-                <p>O arrastra el archivo acá</p>
-            </div>
+                <div class="contenedor-drag">
+                    <button type="submit">Seleccionar archivo</button>
+                    <p>O arrastra el archivo acá</p>
+                </div>
+            </form>
         </section>
 
 
@@ -107,23 +99,8 @@
     https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js
     "></script>
     <script src="index.js"></script>
+    <script src="form.js"></script>
 
 
 
 </body>
-
-=======
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-    <div id="contenidoArchivo"></div>
-    
-    <form action="http://localhost:3000/uploads" method="post" enctype="multipart/form-data" method="post">
-        <input name="file" type="file" id="file"> 
-        <input type="submit" value="Enviar">
-    </form>
-
-</body>
-</html>

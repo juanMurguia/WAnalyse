@@ -1,6 +1,6 @@
-const express = require('express');
-const multer = require('multer')
-const cors = require('cors');
+const express = require("express");
+const multer = require("multer");
+const cors = require("cors");
 
 const { Chat } = require("./chat");
 
@@ -10,25 +10,22 @@ app.use(cors());
 
 app.use(express.json());
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
-const upload = multer({ dest: "uploads/" })
+const upload = multer({ dest: "uploads/" });
 
+app.post("/uploads", upload.single("file"), async (req, res) => {
+  console.log(req.file);
 
-app.post("/uploads", upload.single("file") , async(req,res) =>{
-    console.log(req.file)
+  let chat = new Chat(req.file.filename);
 
-    let chat = new Chat(req.file.filename)
+  await chat.analyse();
 
-    await chat.analyse();
+  chat.deleteFile();
 
-    chat.deleteFile();
-    
-    res.send(chat.getData)
-
-})
-
+  res.send(chat.getData);
+});
 
 app.listen(port, () => {
-    console.log(`Listening on port http://localhost:${port}`);
+  console.log(`Listening on port http://localhost:${port}`);
 });

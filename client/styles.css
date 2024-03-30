@@ -123,10 +123,12 @@ span.color{
 .drop-zone{
     display: flex;
     opacity: 0;
+    top: 0;
+    left: 0;
     position: absolute;
     height: 100dvh;
     width: 100%;
-    z-index: 999;
+    z-index: -1;
     background-color: rgba(0, 0, 0, 0.808);
 }
 
