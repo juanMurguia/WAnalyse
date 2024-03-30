@@ -34,9 +34,17 @@
     <div class="circle"></div>
 
     <main data-scroll-container>
+        <form id="uploadForm" enctype="multipart/form-data" action="http://localhost:5500" method="POST">
+            <input type="file" multiple class="drop-zone__input" id="fileInput" name="file">
+            <button type="submit" onclick="uploadFile()">Enviar archivo</button>
+        </form>
+
         <section data-scroll-section>
             <form id="uploadForm" enctype="multipart/form-data">
-                <button type="submit">Seleccionar archivo</button>
+
+
+
+
                 <div class="drop-zone" id="drop-zone">
                     <p>Soltalo acá</p>
                 </div>
@@ -100,7 +108,38 @@
     "></script>
     <script src="index.js"></script>
     <script src="form.js"></script>
+    <script>
 
+        async function uploadFile(event) {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+
+
+            if (file) {
+
+                const formData = new FormData();
+                formData.append("file", file);
+
+                try {
+                    event.preventDefault();
+                    const response = await fetch("../server/uploads", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        console.log("Archivo enviado exitosamente.");
+                    } else {
+                        console.error("Error al enviar el archivo:", response.statusText);
+                    }
+                } catch (error) {
+                    console.error("Error de red:", error);
+                }
+            } else {
+                console.error("Por favor, selecciona un archivo.");
+            }
+        }</script>
 
 
 </body>

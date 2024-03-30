@@ -108,10 +108,10 @@ span.color{
 }
 
 
-.drop-zone__input {
+/*.drop-zone__input {
     display: none;
   }
-
+*/
 .drop-zone--over{
     background-color: transparent;
 }
